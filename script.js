@@ -28,7 +28,6 @@ class App {
             const currentTime = new Date().getTime();
             if (currentTime - cached.timestamp < 3600000) {
                 this.displayWeather(cached.data);
-                updateBannerBackground(cached.data.weather?.[0]?.main || 'Default');
                 return;
             }
         }
@@ -37,9 +36,6 @@ class App {
 
         fetch(url)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
                 return response.json();
             })
             .then(data => {
@@ -47,7 +43,6 @@ class App {
                 const currentTime = new Date().getTime();
                 localStorage.setItem(cacheKey, JSON.stringify({ timestamp: currentTime, data }));
                 this.displayWeather(data);
-                updateBannerBackground(data.weather?.[0]?.main || 'Default');
             })
             .catch(err => {
                 console.log(err);
@@ -56,7 +51,8 @@ class App {
 
     displayWeather(data) {
         const weatherDescription = data.weather?.[0]?.description || 'Weather information not available';
-        document.querySelector("#weather-text").innerHTML = weatherDescription;
+        document.querySelector("#weather").innerHTML = weatherDescription;
+        updateBannerBackground(data.weather?.[0]?.icon || 'Default');
     }
 
     errorLocation(err) {
@@ -64,21 +60,31 @@ class App {
     }
 }
 
-function updateBannerBackground(weatherCondition) {
+function updateBannerBackground(weatherIcon) {
+    console.log(weatherIcon);
     const backgroundImages = {
-        'Clear': 'url(/images/clear.jpeg)',
-        'Fog': 'url(/images/fog.jpg)',
-        'Clouds': 'url(/images/clouds.webp)',
-        'Rain': 'url(/images/rain.webp)',
-        'Thunder': 'url(/images/thunder.jpeg)',
-        'Snow': 'url(/images/snow.jpeg)',
-        'Wind': 'url(/images/wind.jpg)',
-        'Hail': 'url(/images/hail.jpeg)',
-        'Tornado': 'url(/images/tornado.jpg)',
+        '01d': 'url(/images/clear.jpeg)',
+        '01n': 'url(/images/clear.jpeg)',
+        '02d': 'url(/images/clouds.webp)',
+        '02n': 'url(/images/clouds.webp)',
+        '03d': 'url(/images/clouds.webp)',
+        '03n': 'url(/images/clouds.webp)',
+        '04d': 'url(/images/clouds.webp)',
+        '04n': 'url(/images/clouds.webp)',
+        '09d': 'url(/images/rain.webp)',
+        '09n': 'url(/images/rain.webp)',
+        '10d': 'url(/images/rain.webp)',
+        '10n': 'url(/images/rain.webp)',
+        '11d': 'url(/images/thunder.jpg)',
+        '11n': 'url(/images/thunder.jpg)',
+        '13d': 'url(/images/snow.jpeg)',
+        '13n': 'url(/images/snow.jpeg)',
+        '50d': 'url(/images/fog.jpg)',
+        '50n': 'url(/images/fog.jpg)',
     };
 
     const banner = document.getElementById('weather-banner');
-    banner.style.backgroundImage = backgroundImages[weatherCondition] || 'url(default.jpg)';
+    banner.style.backgroundImage = backgroundImages[weatherIcon];
 }
 
 let app = new App();
