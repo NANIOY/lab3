@@ -12,5 +12,10 @@
     background-size: cover;
     text-align: center;
     padding: 20px;
+}
+
+.weather-text {
     color: black;
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
