@@ -1,5 +1,6 @@
 import Weather from './weather.js';
 import { updateBannerBackground } from './banner.js';
+import { getQuote } from './quote.js'; // Import the getQuote function
 
 class App {
     constructor() {
@@ -31,6 +32,17 @@ class App {
             document.querySelector("#weather").innerHTML = weatherDescription;
             document.querySelector("#weather").id = `weather-${weatherCondition}`;
             updateBannerBackground(data.weather?.[0]?.icon || 'Default');
+
+            // Fetch and display a quote
+            getQuote()
+                .then(quoteData => {
+                    if (quoteData) {
+                        console.log(quoteData.content); // Display the quote content
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     }
 
