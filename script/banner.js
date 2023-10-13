@@ -1,5 +1,3 @@
-import Weather from './weather.js';
-
 function updateBannerBackground(weatherIcon) {
     const backgroundImages = {
         '01d': 'url(/images/clear.jpeg)',
