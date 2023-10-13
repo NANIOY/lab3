@@ -33,11 +33,12 @@ class App {
             document.querySelector("#weather").id = `weather-${weatherCondition}`;
             updateBannerBackground(data.weather?.[0]?.icon || 'Default');
 
-            // Fetch and display a quote
             getQuote()
                 .then(quoteData => {
                     if (quoteData) {
-                        console.log(quoteData.content); // Display the quote content
+                        const quote = document.querySelector("#quote");
+                        quote.innerHTML = quoteData.content;
+                        console.log(quoteData.content);
                     }
                 })
                 .catch(err => {
