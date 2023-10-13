@@ -15,7 +15,7 @@ class App {
         );
     }
 
-    gotLocation(result) {
+    async gotLocation(result) {
         this.lat = result.coords.latitude;
         this.lng = result.coords.longitude;
         this.getWeather();
@@ -26,9 +26,10 @@ class App {
 
         if (data) {
             const weatherDescription = data.weather?.[0]?.description || 'Weather information not available';
+            const weatherCondition = data.weather?.[0]?.main.toLowerCase();
+
             document.querySelector("#weather").innerHTML = weatherDescription;
-            
-            document.querySelector("#weather").id = `weather-${data.weather[0]?.main.toLowerCase()}`;
+            document.querySelector("#weather").id = `weather-${weatherCondition}`;
             updateBannerBackground(data.weather?.[0]?.icon || 'Default');
         }
     }
