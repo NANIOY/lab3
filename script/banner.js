@@ -1,4 +1,5 @@
 function updateBannerBackground(weatherIcon) {
+    // define the background images for each weather condition based on weather icon codes
     const backgroundImages = {
         '01d': 'url(/images/clear.jpeg)',
         '01n': 'url(/images/clear.jpeg)',
