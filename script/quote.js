@@ -1,21 +1,24 @@
-const apiUrl = 'https://api.quotable.io/random';
+const apiUrl = 'https://api.quotable.io/quotes/random';
 
 const quoteTypes = {
-    'clear': 'inspire',
-    'clouds': 'management',
-    'rain': 'life',
-    'thunderstorm': 'funny',
-    'snow': 'art',
+    'clear': 'life',
+    'clouds': 'wisdom',
+    'rain': 'technology',
+    'thunderstorm': 'succes',
+    'snow': 'future',
     'fog': 'love',
-    'default': 'inspire',
+    'default': 'wisdom',
 };
 
 async function getQuote(weatherCondition) {
-    const category = quoteTypes[weatherCondition] || 'inspire';
-    const apiUrlWithCategory = `${apiUrl}?category=${category}`;
+    weatherCondition = weatherCondition.toLowerCase();
+    
+
+    const tags = quoteTypes[weatherCondition] || 'inspire';
+    const apiUrlWithTags = `${apiUrl}?tags=${tags}`;
 
     try {
-        const response = await fetch(apiUrlWithCategory);
+        const response = await fetch(apiUrlWithTags);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -27,4 +30,4 @@ async function getQuote(weatherCondition) {
     }
 }
 
-export { getQuote, quoteTypes };
+export { getQuote };
