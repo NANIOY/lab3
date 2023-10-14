@@ -4,7 +4,7 @@ const quoteTypes = {
     'clear': 'life',
     'clouds': 'wisdom',
     'rain': 'technology',
-    'thunderstorm': 'succes',
+    'thunderstorm': 'success',
     'snow': 'future',
     'fog': 'love',
     'default': 'wisdom',
